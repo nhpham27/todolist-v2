@@ -1,4 +1,3 @@
-// https://thawing-thicket-71096.herokuapp.com/
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -11,7 +10,7 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://Nguyenhoa:Mongodb7604@cluster0.kmoel.mongodb.net/todolistDB");
+mongoose.connect("mongodb+srv://<username>:<password>@cluster0.kmoel.mongodb.net/<databaseName>");
 // create schema
 const itemsSchema = {
   name: String
@@ -62,6 +61,8 @@ app.get("/", function (req, res) {
   });
 });
 
+
+// root route
 app.post("/", function (req, res) {
 
   const itemName = req.body.newItem;
@@ -85,17 +86,9 @@ app.post("/", function (req, res) {
       }
     })
   }
-
-
-  // if (req.body.list === "Work") {
-  //   workItems.push(item);
-  //   res.redirect("/work");
-  // } else {
-  //   items.push(item);
-  //   res.redirect("/");
-  // }
 });
 
+// delete list item
 app.post("/delete", function (req, res) {
   const itemID = req.body.checkbox;
   const listName = req.body.listName;
@@ -122,6 +115,8 @@ app.post("/delete", function (req, res) {
 
 });
 
+
+// Express.js route parameter
 app.get("/:route", function (req, res) {
   const listName = _.capitalize(req.params.route);
   List.findOne({ name: listName }, function (err, foundList) {
