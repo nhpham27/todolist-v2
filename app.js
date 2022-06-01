@@ -1,4 +1,4 @@
-//jshint esversion:6
+// https://thawing-thicket-71096.herokuapp.com/
 
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -133,10 +133,11 @@ app.get("/:route", function (req, res) {
         });
         console.log(listName);
         list.save();
-        setTimeout(function () {
-          //your code to be executed after 1 second
-          res.redirect("/" + listName);
-        }, 50);
+        res.redirect("/" + listName);
+        // setTimeout(function () {
+        //   //your code to be executed after 1 second
+          
+        // }, 50);
       } else {
         res.render("list", { listTitle: foundList.name, newListItems: foundList.items });
       }
